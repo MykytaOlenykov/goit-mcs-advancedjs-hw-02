@@ -128,3 +128,62 @@ button {
   line-height: 150%;
   text-transform: uppercase;
 }
+
+/* 2-snackbar */
+
+.form {
+  margin-top: 16px;
+  max-width: 360px;
+}
+
+.form .input {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.form .label {
+  display: block;
+  margin-bottom: 16px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.form fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin: 0 0 24px;
+  padding: 24px 24px 8px;
+  border-color: #808080;
+  border-width: 1px;
+  border-radius: 4px;
+}
+
+.form fieldset legend {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.form fieldset label {
+  display: flex;
+  gap: 8px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #2e2f42;
+
+  cursor: pointer;
+}
+
+.form .button {
+  width: 100%;
+}
