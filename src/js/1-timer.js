@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import toastr from 'toastr';
-import 'toastr/build/toastr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 import '../css/common.css';
 
@@ -67,10 +67,10 @@ class TimerView {
 
   refresh(timeMs) {
     const { days, hours, minutes, seconds } = this.convertMs(timeMs);
-    this.#daysViewElement?.update(this.normalizeViewTimeValue(days));
-    this.#hoursViewElement?.update(this.normalizeViewTimeValue(hours));
-    this.#minutesViewElement?.update(this.normalizeViewTimeValue(minutes));
-    this.#secondsViewElement?.update(this.normalizeViewTimeValue(seconds));
+    this.#daysViewElement?.update(this.addLeadingZero(days));
+    this.#hoursViewElement?.update(this.addLeadingZero(hours));
+    this.#minutesViewElement?.update(this.addLeadingZero(minutes));
+    this.#secondsViewElement?.update(this.addLeadingZero(seconds));
   }
 
   convertMs(ms) {
@@ -87,7 +87,7 @@ class TimerView {
     return { days, hours, minutes, seconds };
   }
 
-  normalizeViewTimeValue(value) {
+  addLeadingZero(value) {
     return String(value).padStart(2, '0');
   }
 }
@@ -113,7 +113,9 @@ class Timer {
     if (this.#intervalId === null) {
       this.#selectedDatetime = newSelectedDatetime;
     } else {
-      toastr.error('Timer started.');
+      const message = 'Timer started.';
+      iziToast.error({ position: 'topRight', message });
+      throw new Error(message);
     }
   }
 
@@ -135,7 +137,10 @@ class Timer {
 
       if (datetimeDelta <= 0) {
         this.stop();
-        toastr.success('The timer has finished its work.');
+        iziToast.success({
+          position: 'topRight',
+          message: 'The timer has finished its work.',
+        });
         return;
       }
     }, 1000);
@@ -152,7 +157,12 @@ class Timer {
 
   validateDatetime(datetime) {
     const isValidDatetime = datetime > new Date();
-    if (!isValidDatetime) toastr.error('Please choose a date in the future');
+    if (!isValidDatetime) {
+      iziToast.error({
+        position: 'topRight',
+        message: 'Please choose a date in the future',
+      });
+    }
     return isValidDatetime;
   }
 
