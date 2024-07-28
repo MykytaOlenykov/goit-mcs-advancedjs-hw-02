@@ -1,24 +1,8 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import { notify } from './notify';
 
 import '../css/common.css';
 
 const formRef = document.querySelector('.form');
-
-const notify = {
-  success(message) {
-    iziToast.success({
-      position: 'topRight',
-      message,
-    });
-  },
-  error(message) {
-    iziToast.error({
-      position: 'topRight',
-      message,
-    });
-  },
-};
 
 formRef.addEventListener('submit', e => {
   e.preventDefault();

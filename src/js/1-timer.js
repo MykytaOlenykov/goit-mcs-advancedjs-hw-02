@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+
+import { notify } from './notify';
 
 import '../css/common.css';
 
@@ -114,7 +114,7 @@ class Timer {
       this.#selectedDatetime = newSelectedDatetime;
     } else {
       const message = 'Timer started.';
-      iziToast.error({ position: 'topRight', message });
+      notify.error(message);
       throw new Error(message);
     }
   }
@@ -137,10 +137,7 @@ class Timer {
 
       if (datetimeDelta <= 0) {
         this.stop();
-        iziToast.success({
-          position: 'topRight',
-          message: 'The timer has finished its work.',
-        });
+        notify.success('The timer has finished its work.');
         return;
       }
     }, 1000);
@@ -158,10 +155,7 @@ class Timer {
   validateDatetime(datetime) {
     const isValidDatetime = datetime > new Date();
     if (!isValidDatetime) {
-      iziToast.error({
-        position: 'topRight',
-        message: 'Please choose a date in the future',
-      });
+      notify.error('Please choose a date in the future');
     }
     return isValidDatetime;
   }
